@@ -1,0 +1,3205 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+    <meta
+      name="description"
+      content="videobelajar — jelajahi keterampilan baru dan belajar dengan ritmemu sendiri."
+    />
+
+    <title>videobelajar</title>
+
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%23b94f0d'/%3E%3Cpath d='M12 8L25 16L12 24Z' fill='white'/%3E%3C/svg%3E"
+    />
+
+    <style>
+      /* =========================
+       1. TEMA DAN DASAR
+       ========================= */
+
+      :root {
+        --background: #fbfcfa;
+        --surface: #ffffff;
+        --text: #193329;
+        --muted: #64716b;
+        --green: #177747;
+        --green-dark: #105d36;
+        --green-soft: #edf7ef;
+        --orange: #b94f0d;
+        --line: #e3e9e3;
+        --focus: #eab66c;
+        --shadow: 0 16px 44px rgba(24, 52, 35, 0.08);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      [hidden] {
+        display: none !important;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 100px;
+      }
+
+      body {
+        margin: 0;
+        color: var(--text);
+        background: var(--background);
+        font-family: Inter, "Segoe UI", Arial, sans-serif;
+        font-size: 16px;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      body.modal-open {
+        overflow: hidden;
+      }
+
+      button,
+      input,
+      select {
+        font: inherit;
+      }
+
+      button,
+      a,
+      input,
+      select {
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      button {
+        cursor: pointer;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      img {
+        max-width: 100%;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin-top: 0;
+      }
+
+      h1,
+      h2,
+      h3 {
+        line-height: 1.2;
+      }
+
+      :focus-visible {
+        outline: 3px solid var(--focus);
+        outline-offset: 4px;
+      }
+
+      h1:focus {
+        outline: none;
+      }
+
+      .container {
+        width: min(1160px, calc(100% - 48px));
+        margin-inline: auto;
+      }
+
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+
+      .eyebrow {
+        display: inline-block;
+        margin-bottom: 14px;
+        color: var(--green);
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 1.7px;
+        line-height: 1.6;
+      }
+
+      .eyebrow.light {
+        color: #d9eedb;
+      }
+
+      .small-text {
+        font-size: 14px;
+      }
+
+      /* =========================
+       2. TOMBOL DAN HEADER
+       ========================= */
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        min-height: 48px;
+        padding: 12px 22px;
+        border: 1px solid transparent;
+        border-radius: 10px;
+        font-size: 15px;
+        font-weight: 700;
+        line-height: 1.4;
+        text-align: center;
+        transition:
+          background 0.2s,
+          transform 0.2s,
+          box-shadow 0.2s;
+      }
+
+      .btn:hover {
+        transform: translateY(-1px);
+      }
+
+      .btn:active {
+        transform: translateY(0);
+      }
+
+      .btn-primary {
+        color: #ffffff;
+        background: var(--green);
+      }
+
+      .btn-primary:hover {
+        background: var(--green-dark);
+        box-shadow: 0 6px 18px rgba(23, 119, 71, 0.15);
+      }
+
+      .btn-outline {
+        color: var(--text);
+        background: #ffffff;
+        border-color: var(--line);
+      }
+
+      .btn-outline:hover {
+        background: #f4f8f4;
+        border-color: #bdcebf;
+      }
+
+      .btn-small {
+        min-height: 42px;
+        padding: 10px 16px;
+        font-size: 14px;
+      }
+
+      .full-width {
+        width: 100%;
+      }
+
+      .text-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 0;
+        border: 0;
+        color: var(--green);
+        background: none;
+        font-weight: 700;
+        line-height: 1.6;
+      }
+
+      .text-button:hover {
+        color: var(--green-dark);
+        text-decoration: underline;
+        text-underline-offset: 4px;
+      }
+
+      .quiet-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 9px;
+        min-height: 44px;
+        padding: 6px 0;
+        border: 0;
+        color: var(--muted);
+        background: none;
+        font-size: 14px;
+        font-weight: 600;
+      }
+
+      .quiet-link:hover {
+        color: var(--green);
+      }
+
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        background: rgba(255, 255, 255, 0.97);
+        border-bottom: 1px solid var(--line);
+        backdrop-filter: blur(14px);
+      }
+
+      .header-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        min-height: 80px;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--orange);
+        font-size: 28px;
+        font-weight: 800;
+        letter-spacing: -1.2px;
+        white-space: nowrap;
+      }
+
+      .brand b {
+        color: var(--text);
+        font-weight: 800;
+      }
+
+      .brand-mark {
+        display: grid;
+        place-items: center;
+        width: 34px;
+        height: 34px;
+        padding-left: 2px;
+        color: #ffffff;
+        background: var(--orange);
+        border-radius: 10px;
+        font-size: 14px;
+        letter-spacing: 0;
+      }
+
+      .home-navigation,
+      .header-actions {
+        display: flex;
+        align-items: center;
+        gap: 28px;
+      }
+
+      .avatar {
+        display: inline-grid;
+        place-items: center;
+        flex: 0 0 auto;
+        width: 42px;
+        height: 42px;
+        color: var(--green-dark);
+        background: #e4f0e5;
+        border: 1px solid #d3e4d4;
+        border-radius: 50%;
+        font-size: 14px;
+        font-weight: 800;
+      }
+
+      .profile-menu {
+        position: relative;
+      }
+
+      .profile-menu summary {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        list-style: none;
+        cursor: pointer;
+      }
+
+      .profile-menu summary::-webkit-details-marker {
+        display: none;
+      }
+
+      .profile-dropdown {
+        position: absolute;
+        top: calc(100% + 15px);
+        right: 0;
+        width: 250px;
+        padding: 18px;
+        background: #ffffff;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        box-shadow: var(--shadow);
+      }
+
+      .profile-dropdown strong,
+      .profile-dropdown small {
+        display: block;
+        overflow-wrap: anywhere;
+      }
+
+      .profile-dropdown small {
+        margin-top: 3px;
+        color: var(--muted);
+      }
+
+      .profile-dropdown hr {
+        margin: 14px 0;
+        border: 0;
+        border-top: 1px solid var(--line);
+      }
+
+      .profile-dropdown button {
+        padding: 5px 0;
+        border: 0;
+        color: #a43b32;
+        background: none;
+        font-size: 14px;
+        font-weight: 600;
+      }
+
+      /* =========================
+       3. LOGIN DAN REGISTER
+       ========================= */
+
+      [data-page] {
+        animation: page-in 0.25s ease;
+      }
+
+      .auth-layout {
+        display: grid;
+        grid-template-columns: 1.05fr 0.95fr;
+        align-items: stretch;
+        gap: 70px;
+        min-height: calc(100svh - 80px);
+        padding-block: 34px 48px;
+      }
+
+      .auth-visual {
+        position: relative;
+        min-height: 660px;
+        overflow: hidden;
+        color: #ffffff;
+        background: #173e2f;
+        border-radius: 24px;
+        isolation: isolate;
+      }
+
+      .auth-visual img {
+        position: absolute;
+        inset: 0;
+        z-index: -2;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .auth-visual::after {
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        content: "";
+        background: linear-gradient(
+          180deg,
+          rgba(10, 37, 24, 0.04) 15%,
+          rgba(10, 37, 24, 0.4) 48%,
+          rgba(10, 37, 24, 0.93) 100%
+        );
+      }
+
+      .auth-copy {
+        position: absolute;
+        right: 40px;
+        bottom: 42px;
+        left: 40px;
+      }
+
+      .auth-copy h2 {
+        margin-bottom: 20px;
+        font-size: clamp(32px, 3.3vw, 46px);
+        font-weight: 750;
+        letter-spacing: -1.6px;
+      }
+
+      .auth-copy p {
+        max-width: 360px;
+        margin-bottom: 26px;
+        color: #edf4ed;
+        font-size: 16px;
+        line-height: 1.8;
+      }
+
+      .visual-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .visual-tags span {
+        padding: 7px 12px;
+        border: 1px solid rgba(255, 255, 255, 0.28);
+        border-radius: 100px;
+        color: #ffffff;
+        background: rgba(255, 255, 255, 0.07);
+        font-size: 12px;
+      }
+
+      .auth-form-wrap {
+        align-self: center;
+        width: 100%;
+        max-width: 430px;
+        padding-block: 22px;
+      }
+
+      .auth-form-wrap h1 {
+        margin-bottom: 14px;
+        font-size: 40px;
+        font-weight: 750;
+        letter-spacing: -1.6px;
+      }
+
+      .subheading {
+        margin-bottom: 28px;
+        color: var(--muted);
+        font-size: 15px;
+        line-height: 1.75;
+      }
+
+      .field {
+        margin-bottom: 18px;
+      }
+
+      .field label {
+        display: block;
+        margin-bottom: 7px;
+        color: var(--text);
+        font-size: 14px;
+        font-weight: 650;
+      }
+
+      .field-heading {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 12px;
+      }
+
+      input:not([type="file"]),
+      select {
+        width: 100%;
+        min-height: 49px;
+        padding: 12px 14px;
+        border: 1px solid #d8e1d9;
+        border-radius: 9px;
+        color: var(--text);
+        background: #ffffff;
+        font-size: 16px;
+        transition:
+          border-color 0.2s,
+          box-shadow 0.2s;
+      }
+
+      input::placeholder {
+        color: #829087;
+        font-size: 14px;
+      }
+
+      input:focus,
+      select:focus {
+        border-color: var(--green);
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(23, 119, 71, 0.1);
+      }
+
+      .password-field {
+        position: relative;
+      }
+
+      .password-field input {
+        padding-right: 100px;
+      }
+
+      .reveal {
+        position: absolute;
+        top: 4px;
+        right: 5px;
+        min-width: 65px;
+        min-height: 41px;
+        padding-inline: 8px;
+        border: 0;
+        border-radius: 6px;
+        color: var(--muted);
+        background: transparent;
+        font-size: 12px;
+        font-weight: 650;
+      }
+
+      .reveal:hover {
+        color: var(--green);
+        background: var(--green-soft);
+      }
+
+      .phone-field {
+        display: flex;
+        align-items: stretch;
+      }
+
+      .phone-field > span {
+        display: grid;
+        place-items: center;
+        flex: 0 0 65px;
+        border: 1px solid #d8e1d9;
+        border-right: 0;
+        border-radius: 9px 0 0 9px;
+        color: var(--muted);
+        background: #f2f6f2;
+        font-size: 14px;
+      }
+
+      .phone-field input {
+        min-width: 0;
+        border-radius: 0 9px 9px 0;
+      }
+
+      .divider {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin: 22px 0;
+        color: #7c8880;
+        font-size: 13px;
+      }
+
+      .divider::before,
+      .divider::after {
+        flex: 1;
+        height: 1px;
+        content: "";
+        background: var(--line);
+      }
+
+      .google-letter {
+        color: #356bc0;
+        font-size: 20px;
+        font-weight: 800;
+      }
+
+      .auth-switch {
+        margin: 23px 0 0;
+        color: var(--muted);
+        font-size: 14px;
+        text-align: center;
+      }
+
+      .auth-switch a {
+        color: var(--green);
+        font-weight: 700;
+      }
+
+      .demo-box {
+        margin-top: 28px;
+        padding: 16px 18px;
+        border: 1px solid #e1e9dc;
+        border-radius: 12px;
+        background: #f2f7ef;
+        font-size: 13px;
+      }
+
+      .demo-box strong {
+        font-size: 14px;
+      }
+
+      .demo-box p {
+        margin: 6px 0 9px;
+        color: var(--muted);
+        line-height: 1.8;
+      }
+
+      .demo-box code {
+        color: var(--text);
+        overflow-wrap: anywhere;
+      }
+
+      .demo-note {
+        margin: 8px 0 18px;
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.7;
+      }
+
+      .form-error {
+        padding: 11px 13px;
+        border: 1px solid #efd4cd;
+        border-radius: 8px;
+        color: #9c352c;
+        background: #fff3ef;
+        font-size: 14px;
+      }
+
+      .register-layout .auth-form-wrap {
+        padding-block: 8px;
+      }
+
+      .register-layout .auth-form-wrap h1 {
+        font-size: 36px;
+      }
+
+      .register-layout .field {
+        margin-bottom: 14px;
+      }
+
+      .register-layout .subheading {
+        margin-bottom: 22px;
+      }
+
+      .register-layout .auth-switch {
+        margin-bottom: 12px;
+      }
+
+      /* =========================
+       4. HERO BERANDA
+       ========================= */
+
+      .home-content {
+        padding-top: 32px;
+      }
+
+      .hero {
+        position: relative;
+        min-height: 440px;
+        padding: 52px;
+        overflow: hidden;
+        color: #ffffff;
+        background: #183d2b;
+        border-radius: 24px;
+        isolation: isolate;
+      }
+
+      .hero > img {
+        position: absolute;
+        inset: 0;
+        z-index: -2;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center 42%;
+      }
+
+      .hero::after {
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        content: "";
+        background: linear-gradient(
+          90deg,
+          rgba(10, 36, 22, 0.94) 0%,
+          rgba(10, 36, 22, 0.84) 38%,
+          rgba(10, 36, 22, 0.32) 100%
+        );
+      }
+
+      .hero-content {
+        max-width: 650px;
+      }
+
+      .hero h1 {
+        margin-bottom: 20px;
+        font-size: clamp(36px, 4.6vw, 58px);
+        font-weight: 750;
+        letter-spacing: -2.1px;
+        line-height: 1.12;
+      }
+
+      .hero h1 em {
+        color: #f1d99b;
+        font-style: normal;
+      }
+
+      .hero-content > p {
+        max-width: 490px;
+        margin-bottom: 28px;
+        color: #e0eae1;
+        font-size: 16px;
+        line-height: 1.8;
+      }
+
+      .hero-cta {
+        background: #ffffff;
+        color: var(--green-dark);
+      }
+
+      .hero-cta:hover {
+        background: #e9f5e9;
+        color: var(--green-dark);
+      }
+
+      .hero-footnote {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 20px;
+        color: #dce9dc;
+        font-size: 12px;
+      }
+
+      .hero-stamp {
+        position: absolute;
+        right: 32px;
+        bottom: 30px;
+        display: flex;
+        align-items: center;
+        gap: 13px;
+        padding: 15px 18px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 14px;
+        color: #ffffff;
+        background: rgba(255, 255, 255, 0.12);
+        backdrop-filter: blur(14px);
+      }
+
+      .hero-stamp > span {
+        display: grid;
+        place-items: center;
+        width: 34px;
+        height: 34px;
+        border: 1px solid rgba(255, 255, 255, 0.6);
+        border-radius: 50%;
+        font-size: 11px;
+      }
+
+      .hero-stamp strong,
+      .hero-stamp small {
+        display: block;
+      }
+
+      .hero-stamp strong {
+        font-size: 13px;
+      }
+
+      .hero-stamp small {
+        color: #e0e9df;
+        font-size: 12px;
+      }
+
+      /* =========================
+       5. KATALOG KELAS
+       ========================= */
+
+      .catalog {
+        padding-top: 60px;
+        scroll-margin-top: 95px;
+      }
+
+      .section-heading {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 24px;
+        margin-bottom: 25px;
+      }
+
+      .section-heading .eyebrow {
+        margin-bottom: 10px;
+      }
+
+      .section-heading h2 {
+        margin-bottom: 12px;
+        font-size: 34px;
+        font-weight: 750;
+        letter-spacing: -1.2px;
+      }
+
+      .section-heading p {
+        margin-bottom: 0;
+        color: var(--muted);
+        font-size: 15px;
+      }
+
+      .catalog-marker {
+        flex: 0 0 auto;
+        padding-bottom: 2px;
+        color: var(--green);
+        font-size: 13px;
+        font-weight: 650;
+      }
+
+      .catalog-marker span {
+        margin-left: 10px;
+        font-size: 24px;
+      }
+
+      .category-list {
+        display: flex;
+        gap: 10px;
+        padding: 4px 1px 17px;
+        overflow-x: auto;
+        border-bottom: 1px solid var(--line);
+        scrollbar-width: thin;
+      }
+
+      .category-list button {
+        flex: 0 0 auto;
+        min-height: 43px;
+        padding: 9px 18px;
+        border: 1px solid var(--line);
+        border-radius: 100px;
+        color: var(--muted);
+        background: #ffffff;
+        font-size: 14px;
+        font-weight: 600;
+        transition:
+          background 0.2s,
+          color 0.2s;
+      }
+
+      .category-list button:hover {
+        color: var(--green);
+        border-color: #b7d1bd;
+      }
+
+      .category-list button[aria-pressed="true"] {
+        border-color: var(--green);
+        color: #ffffff;
+        background: var(--green);
+      }
+
+      .course-count {
+        margin: 17px 0 18px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .course-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 25px;
+      }
+
+      .course-card {
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: #ffffff;
+        transition:
+          transform 0.25s,
+          box-shadow 0.25s;
+      }
+
+      .course-card:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow);
+      }
+
+      .course-cover {
+        position: relative;
+        display: block;
+        width: 100%;
+        padding: 0;
+        overflow: hidden;
+        aspect-ratio: 16 / 10;
+        border: 0;
+        background: #dce7db;
+      }
+
+      .course-cover img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.45s;
+      }
+
+      .course-cover:hover img {
+        transform: scale(1.05);
+      }
+
+      .course-tag {
+        position: absolute;
+        top: 13px;
+        left: 13px;
+        padding: 5px 10px;
+        border-radius: 6px;
+        color: #344a35;
+        background: rgba(255, 255, 255, 0.96);
+        font-size: 11px;
+        font-weight: 750;
+      }
+
+      .cover-play {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        display: grid;
+        place-items: center;
+        width: 54px;
+        height: 54px;
+        padding-left: 3px;
+        border: 1px solid #ffffff;
+        border-radius: 50%;
+        color: var(--green-dark);
+        background: #ffffff;
+        opacity: 0;
+        transform: translate(-50%, -40%);
+        transition:
+          opacity 0.2s,
+          transform 0.2s;
+      }
+
+      .course-cover:hover .cover-play,
+      .course-cover:focus-visible .cover-play {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+      }
+
+      .video-label {
+        position: absolute;
+        right: 12px;
+        bottom: 12px;
+        padding: 4px 7px;
+        border-radius: 4px;
+        color: #ffffff;
+        background: rgba(14, 32, 20, 0.8);
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.8px;
+      }
+
+      .course-body {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        padding: 21px;
+      }
+
+      .course-category {
+        margin-bottom: 8px;
+        color: var(--orange);
+        font-size: 12px;
+        font-weight: 750;
+      }
+
+      .course-body h3 {
+        margin-bottom: 10px;
+        font-size: 20px;
+        letter-spacing: -0.45px;
+        line-height: 1.4;
+      }
+
+      .title-button {
+        padding: 0;
+        border: 0;
+        color: var(--text);
+        background: none;
+        font: inherit;
+        font-weight: 750;
+        text-align: left;
+      }
+
+      .title-button:hover {
+        color: var(--green);
+      }
+
+      .course-description {
+        margin-bottom: 19px;
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.75;
+      }
+
+      .mentor {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: auto;
+        margin-bottom: 18px;
+      }
+
+      .mentor-avatar {
+        width: 36px;
+        height: 36px;
+        font-size: 11px;
+      }
+
+      .mentor strong,
+      .mentor small {
+        display: block;
+      }
+
+      .mentor strong {
+        font-size: 13px;
+        font-weight: 650;
+      }
+
+      .mentor small {
+        color: var(--muted);
+        font-size: 11px;
+      }
+
+      .course-bottom {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding-top: 15px;
+        border-top: 1px solid var(--line);
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      .course-bottom button {
+        font-size: 14px;
+      }
+
+      .catalog-note {
+        margin-top: 20px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      /* =========================
+       6. NEWSLETTER DAN FOOTER
+       ========================= */
+
+      .newsletter {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+        gap: 40px;
+        margin-block: 55px 60px;
+        padding: 38px;
+        border: 1px solid #dce8db;
+        border-radius: 20px;
+        background: #edf5eb;
+      }
+
+      .newsletter .eyebrow {
+        margin-bottom: 10px;
+        font-size: 10px;
+        letter-spacing: 1.3px;
+      }
+
+      .newsletter h2 {
+        margin-bottom: 12px;
+        font-size: 30px;
+        letter-spacing: -1px;
+      }
+
+      .newsletter p {
+        margin-bottom: 0;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .newsletter-right {
+        min-width: 0;
+      }
+
+      .newsletter form {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        padding: 6px;
+        border: 1px solid #d1dfce;
+        border-radius: 12px;
+        background: #ffffff;
+      }
+
+      .newsletter form:focus-within {
+        border-color: var(--green);
+      }
+
+      .newsletter input {
+        min-width: 0;
+        border: 0;
+        background: transparent;
+      }
+
+      .newsletter input:focus {
+        box-shadow: none;
+      }
+
+      .newsletter form .btn {
+        flex: 0 0 auto;
+        padding-inline: 16px;
+        font-size: 13px;
+      }
+
+      .newsletter .newsletter-note {
+        margin-top: 10px;
+        font-size: 11px;
+      }
+
+      .site-footer {
+        background: #ffffff;
+        border-top: 1px solid var(--line);
+      }
+
+      .footer-top {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1fr;
+        gap: 40px;
+        padding-block: 48px;
+      }
+
+      .footer-about p {
+        max-width: 300px;
+        margin: 16px 0 12px;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .footer-top h3 {
+        margin: 7px 0 18px;
+        font-size: 15px;
+        font-weight: 750;
+      }
+
+      .footer-top button,
+      .footer-top > div > a:not(.brand) {
+        display: block;
+        padding: 0;
+        margin-bottom: 10px;
+        border: 0;
+        color: var(--muted);
+        background: none;
+        font-size: 14px;
+        text-align: left;
+      }
+
+      .footer-top button:hover,
+      .footer-top > div > a:not(.brand):hover {
+        color: var(--green);
+      }
+
+      .footer-label {
+        color: var(--muted);
+        font-size: 11px;
+      }
+
+      .footer-bottom {
+        display: flex;
+        justify-content: space-between;
+        gap: 24px;
+        padding-block: 21px;
+        border-top: 1px solid var(--line);
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      /* =========================
+       7. DIALOG VIDEO DAN INFORMASI
+       ========================= */
+
+      dialog {
+        padding: 0;
+        border: 0;
+        border-radius: 20px;
+        color: var(--text);
+        background: #ffffff;
+        box-shadow: 0 25px 100px rgba(0, 0, 0, 0.3);
+      }
+
+      dialog::backdrop {
+        background: rgba(12, 26, 18, 0.65);
+        backdrop-filter: blur(6px);
+      }
+
+      .player-dialog {
+        width: min(1040px, calc(100% - 32px));
+        max-height: 90svh;
+        overflow-y: auto;
+      }
+
+      .player-header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 20px;
+        padding: 23px 26px;
+      }
+
+      .player-header .eyebrow {
+        margin-bottom: 6px;
+        font-size: 10px;
+      }
+
+      .player-header h2 {
+        margin-bottom: 8px;
+        font-size: 25px;
+        letter-spacing: -0.6px;
+      }
+
+      .player-header p {
+        margin-bottom: 0;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .icon-button {
+        display: grid;
+        place-items: center;
+        flex: 0 0 auto;
+        width: 42px;
+        height: 42px;
+        padding: 0;
+        border: 1px solid var(--line);
+        border-radius: 50%;
+        color: var(--text);
+        background: #f7f9f6;
+        font-size: 26px;
+        line-height: 1;
+      }
+
+      .icon-button:hover {
+        background: #eaf2e8;
+      }
+
+      #course-video {
+        display: block;
+        width: 100%;
+        max-height: 55svh;
+        aspect-ratio: 16 / 9;
+        object-fit: contain;
+        background: #101510;
+      }
+
+      .player-toolbar {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 15px;
+        padding: 16px 26px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .player-toolbar p {
+        flex: 1;
+        min-width: 150px;
+        margin: 0;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .player-toolbar label {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 12px;
+      }
+
+      .player-toolbar select {
+        width: auto;
+        min-height: 40px;
+        padding: 7px 9px;
+        font-size: 13px;
+      }
+
+      .player-details {
+        display: grid;
+        grid-template-columns: 1.3fr 1fr;
+        gap: 32px;
+        padding: 26px;
+      }
+
+      .player-details h3 {
+        margin-bottom: 12px;
+        font-size: 17px;
+      }
+
+      .player-details p,
+      .player-details li {
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.8;
+      }
+
+      .player-details ul {
+        margin: 0;
+        padding-left: 20px;
+      }
+
+      .notice {
+        padding: 12px 14px;
+        border: 1px solid #eadfc9;
+        border-radius: 9px;
+        color: #735829;
+        background: #fff9ec;
+        font-size: 12px;
+      }
+
+      .player-details .notice {
+        color: #735829;
+        font-size: 12px;
+      }
+
+      .info-dialog {
+        width: min(460px, calc(100% - 32px));
+        padding: 26px;
+      }
+
+      .info-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+      }
+
+      .info-top .eyebrow {
+        margin: 0;
+      }
+
+      .info-dialog h2 {
+        margin: 20px 0 14px;
+        font-size: 26px;
+      }
+
+      .info-dialog p {
+        margin-bottom: 0;
+        color: var(--muted);
+        font-size: 15px;
+        line-height: 1.8;
+      }
+
+      .toast {
+        position: fixed;
+        bottom: 24px;
+        left: 50%;
+        z-index: 100;
+        width: max-content;
+        max-width: calc(100% - 32px);
+        padding: 14px 20px;
+        border: 1px solid #306d49;
+        border-radius: 12px;
+        color: #ffffff;
+        background: #193f2b;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.16);
+        font-size: 14px;
+        text-align: center;
+        transform: translateX(-50%);
+      }
+
+      /* =========================
+       8. RESPONSIVE
+       ========================= */
+
+      @keyframes page-in {
+        from {
+          opacity: 0;
+          transform: translateY(6px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 1050px) {
+        .auth-layout {
+          gap: 40px;
+        }
+
+        .auth-copy {
+          right: 28px;
+          left: 28px;
+        }
+
+        .auth-form-wrap h1 {
+          font-size: 36px;
+        }
+
+        .hero-stamp {
+          display: none;
+        }
+
+        .newsletter {
+          grid-template-columns: 1fr;
+          gap: 24px;
+        }
+
+        .footer-top {
+          gap: 24px;
+        }
+      }
+
+      @media (max-width: 850px) {
+        .course-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .auth-layout {
+          grid-template-columns: 0.85fr 1fr;
+          gap: 30px;
+        }
+
+        .auth-copy h2 {
+          font-size: 32px;
+        }
+
+        .auth-copy p {
+          font-size: 14px;
+        }
+
+        .auth-form-wrap h1 {
+          font-size: 32px;
+        }
+
+        .catalog-marker {
+          display: none;
+        }
+
+        .footer-top {
+          grid-template-columns: 2fr 1fr 1fr;
+        }
+
+        .footer-top > div:last-child {
+          grid-column: 2 / 4;
+        }
+      }
+
+      @media (max-width: 680px) {
+        .container {
+          width: calc(100% - 32px);
+        }
+
+        .header-inner {
+          min-height: 70px;
+          gap: 14px;
+        }
+
+        .brand {
+          gap: 8px;
+          font-size: 24px;
+        }
+
+        .brand-mark {
+          width: 29px;
+          height: 29px;
+          border-radius: 8px;
+          font-size: 12px;
+        }
+
+        .home-navigation,
+        .header-actions {
+          gap: 14px;
+        }
+
+        .catalog-nav {
+          display: none;
+        }
+
+        .quiet-link {
+          font-size: 13px;
+        }
+
+        .header-actions .btn {
+          min-height: 38px;
+          padding: 8px 12px;
+        }
+
+        .auth-layout {
+          display: block;
+          min-height: calc(100svh - 70px);
+          padding-block: 34px 45px;
+        }
+
+        .auth-visual {
+          display: none;
+        }
+
+        .auth-form-wrap {
+          max-width: 430px;
+          margin-inline: auto;
+          padding-block: 0;
+        }
+
+        .auth-form-wrap h1,
+        .register-layout .auth-form-wrap h1 {
+          font-size: 34px;
+        }
+
+        .auth-form-wrap .eyebrow {
+          font-size: 10px;
+        }
+
+        .home-content {
+          padding-top: 18px;
+        }
+
+        .hero {
+          min-height: 405px;
+          padding: 34px 25px;
+          border-radius: 18px;
+        }
+
+        .hero::after {
+          background: rgba(10, 36, 22, 0.81);
+        }
+
+        .hero h1 {
+          font-size: 39px;
+          letter-spacing: -1.5px;
+        }
+
+        .hero .eyebrow {
+          font-size: 9px;
+          letter-spacing: 1.4px;
+        }
+
+        .hero-content > p {
+          font-size: 14px;
+        }
+
+        .catalog {
+          padding-top: 37px;
+        }
+
+        .section-heading h2 {
+          font-size: 28px;
+        }
+
+        .section-heading p {
+          font-size: 14px;
+        }
+
+        .category-list button {
+          padding-inline: 15px;
+          font-size: 13px;
+        }
+
+        .course-grid {
+          gap: 16px;
+        }
+
+        .course-body {
+          padding: 17px;
+        }
+
+        .course-body h3 {
+          font-size: 18px;
+        }
+
+        .newsletter {
+          margin-block: 36px 38px;
+          padding: 25px;
+        }
+
+        .newsletter h2 {
+          font-size: 27px;
+        }
+
+        .newsletter form {
+          flex-direction: column;
+          align-items: stretch;
+          padding: 0;
+          border: 0;
+          background: transparent;
+        }
+
+        .newsletter input {
+          border: 1px solid #d1dfce;
+          background: #ffffff;
+        }
+
+        .newsletter form .btn {
+          width: 100%;
+        }
+
+        .footer-top {
+          grid-template-columns: 1fr 1fr;
+          gap: 24px;
+          padding-block: 32px;
+        }
+
+        .footer-about {
+          grid-column: 1 / -1;
+        }
+
+        .footer-top > div:last-child {
+          grid-column: auto;
+        }
+
+        .footer-bottom {
+          flex-direction: column;
+          gap: 6px;
+        }
+
+        .player-header {
+          padding: 18px;
+        }
+
+        .player-header h2 {
+          font-size: 20px;
+        }
+
+        .player-toolbar {
+          padding: 14px 18px;
+          gap: 12px;
+        }
+
+        .player-toolbar p {
+          flex-basis: 100%;
+        }
+
+        .player-details {
+          grid-template-columns: 1fr;
+          gap: 20px;
+          padding: 20px 18px;
+        }
+      }
+
+      @media (max-width: 460px) {
+        .course-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .course-cover {
+          aspect-ratio: 16 / 9;
+        }
+
+        .course-body {
+          padding: 20px;
+        }
+
+        .course-body h3 {
+          font-size: 21px;
+        }
+
+        .course-description {
+          font-size: 14px;
+        }
+
+        .hero h1 {
+          font-size: 34px;
+        }
+
+        .hero {
+          padding-inline: 22px;
+        }
+
+        .auth-form-wrap h1,
+        .register-layout .auth-form-wrap h1 {
+          font-size: 31px;
+        }
+
+        #auth-navigation .quiet-link {
+          max-width: 100px;
+          font-size: 12px;
+        }
+
+        .header-actions {
+          gap: 10px;
+        }
+
+        .header-actions .quiet-link {
+          font-size: 12px;
+        }
+
+        .header-actions .btn {
+          padding: 8px 10px;
+          font-size: 12px;
+        }
+
+        .field-heading .small-text {
+          font-size: 12px;
+        }
+      }
+
+      @media (hover: none) {
+        .cover-play {
+          opacity: 1;
+          transform: translate(-50%, -50%);
+          background: rgba(255, 255, 255, 0.9);
+        }
+
+        .course-card:hover {
+          transform: none;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+
+        *,
+        *::before,
+        *::after {
+          animation: none !important;
+          transition: none !important;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- HEADER BERSAMA -->
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="#/beranda" aria-label="videobelajar — beranda">
+          <span class="brand-mark" aria-hidden="true">▶</span>
+          <span>video<b>belajar</b></span>
+        </a>
+
+        <nav id="auth-navigation" aria-label="Navigasi akun">
+          <a class="quiet-link" href="#/beranda">
+            Jelajahi kelas <span aria-hidden="true">↗</span>
+          </a>
+        </nav>
+
+        <nav
+          id="home-navigation"
+          class="home-navigation"
+          aria-label="Navigasi utama"
+          hidden
+        >
+          <button class="quiet-link catalog-nav" type="button" data-catalog>
+            Jelajahi kelas
+          </button>
+
+          <div id="guest-actions" class="header-actions">
+            <a class="quiet-link" href="#/login">Masuk</a>
+            <a class="btn btn-primary btn-small" href="#/register">Daftar</a>
+          </div>
+
+          <details id="profile-menu" class="profile-menu" hidden>
+            <summary aria-label="Buka menu profil">
+              <span id="profile-initials" class="avatar">U</span>
+              <span aria-hidden="true">⌄</span>
+            </summary>
+
+            <div class="profile-dropdown">
+              <strong id="profile-name">Pengguna</strong>
+              <small id="profile-email"></small>
+              <hr />
+              <button id="logout-button" type="button">Keluar dari akun</button>
+            </div>
+          </details>
+        </nav>
+      </div>
+    </header>
+
+    <noscript>
+      <p class="container notice">
+        Aktifkan JavaScript untuk menggunakan navigasi dan fitur website ini.
+      </p>
+    </noscript>
+
+    <main>
+      <!-- =========================
+         HALAMAN LOGIN
+         ========================= -->
+      <section data-page="login" class="container auth-layout">
+        <aside class="auth-visual" aria-label="Inspirasi belajar">
+          <img
+            src="https://images.unsplash.com/photo-1523240795612-9a054b0db644"
+            alt=""
+            fetchpriority="high"
+          />
+
+          <div class="auth-copy">
+            <span class="eyebrow light">RUANG UNTUK BERTUMBUH</span>
+
+            <h2>
+              Satu langkah baru.<br />
+              Banyak kemungkinan.
+            </h2>
+
+            <p>
+              Temukan pengetahuan, latih kemampuan, dan mulai perjalananmu
+              bersama videobelajar.
+            </p>
+
+            <div class="visual-tags">
+              <span>Belajar fleksibel</span>
+              <span>Video on demand</span>
+            </div>
+          </div>
+        </aside>
+
+        <div class="auth-form-wrap">
+          <span class="eyebrow">SELAMAT DATANG KEMBALI</span>
+
+          <h1 tabindex="-1">
+            Lanjutkan<br />
+            perjalanan belajarmu.
+          </h1>
+
+          <p class="subheading">
+            Masuk dan temukan hal baru untuk dipelajari hari ini.
+          </p>
+
+          <form id="login-form" method="post">
+            <div class="field">
+              <label for="login-email">E-mail</label>
+              <input
+                id="login-email"
+                type="email"
+                placeholder="nama@example.com"
+                autocomplete="username"
+                required
+              />
+            </div>
+
+            <div class="field">
+              <div class="field-heading">
+                <label for="login-password">Kata sandi</label>
+
+                <button
+                  type="button"
+                  class="text-button small-text"
+                  data-info="password"
+                >
+                  Lupa password?
+                </button>
+              </div>
+
+              <div class="password-field">
+                <input
+                  id="login-password"
+                  type="password"
+                  placeholder="Masukkan kata sandi"
+                  autocomplete="current-password"
+                  required
+                />
+
+                <button
+                  type="button"
+                  class="reveal"
+                  data-password="login-password"
+                  aria-label="Tampilkan kata sandi"
+                  aria-pressed="false"
+                >
+                  Lihat
+                </button>
+              </div>
+            </div>
+
+            <p id="login-error" class="form-error" role="alert" hidden></p>
+
+            <button class="btn btn-primary full-width" type="submit">
+              Masuk <span aria-hidden="true">→</span>
+            </button>
+          </form>
+
+          <div class="divider"><span>atau</span></div>
+
+          <button
+            class="btn btn-outline full-width"
+            type="button"
+            data-info="google"
+          >
+            <span class="google-letter" aria-hidden="true">G</span>
+            Masuk dengan Google
+          </button>
+
+          <p class="auth-switch">
+            Belum punya akun?
+            <a href="#/register">Daftar sekarang</a>
+          </p>
+
+          <div class="demo-box">
+            <strong>Ingin mencoba dulu?</strong>
+
+            <p>
+              Demo: <code>demo@videobelajar.id</code><br />
+              Kata sandi: <code>Belajar123!</code>
+            </p>
+
+            <button class="text-button" type="button" data-demo>
+              Coba akun demo <span aria-hidden="true">→</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================
+         HALAMAN REGISTER
+         ========================= -->
+      <section
+        data-page="register"
+        class="container auth-layout register-layout"
+        hidden
+      >
+        <aside class="auth-visual" aria-label="Inspirasi belajar">
+          <img
+            src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f"
+            alt=""
+            loading="lazy"
+          />
+
+          <div class="auth-copy">
+            <span class="eyebrow light"> MULAI DARI RASA INGIN TAHU </span>
+
+            <h2>
+              Versi terbaikmu<br />
+              dimulai dari sini.
+            </h2>
+
+            <p>
+              Jelajahi ide, buka perspektif baru, dan belajar dengan ritmemu
+              sendiri.
+            </p>
+
+            <div class="visual-tags">
+              <span>Untuk pemula</span>
+              <span>Di mana saja</span>
+            </div>
+          </div>
+        </aside>
+
+        <div class="auth-form-wrap">
+          <span class="eyebrow">LANGKAH PERTAMAMU</span>
+
+          <h1 tabindex="-1">
+            Mulai perjalanan<br />
+            belajarmu.
+          </h1>
+
+          <p class="subheading">Buat akun demo dan jelajahi koleksi kelas.</p>
+
+          <form id="register-form" method="post">
+            <div class="field">
+              <label for="register-name">Nama lengkap</label>
+              <input
+                id="register-name"
+                type="text"
+                placeholder="Nama lengkap kamu"
+                minlength="2"
+                maxlength="70"
+                autocomplete="name"
+                required
+              />
+            </div>
+
+            <div class="field">
+              <label for="register-email">E-mail</label>
+              <input
+                id="register-email"
+                type="email"
+                placeholder="nama@example.com"
+                autocomplete="email"
+                required
+              />
+            </div>
+
+            <div class="field">
+              <label for="register-phone">Nomor HP</label>
+
+              <div class="phone-field">
+                <span>+62</span>
+                <input
+                  id="register-phone"
+                  type="tel"
+                  placeholder="812 3456 7890"
+                  autocomplete="tel-national"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="register-password">Kata sandi</label>
+
+              <div class="password-field">
+                <input
+                  id="register-password"
+                  type="password"
+                  placeholder="Minimal 8 karakter"
+                  minlength="8"
+                  autocomplete="new-password"
+                  required
+                />
+
+                <button
+                  class="reveal"
+                  type="button"
+                  data-password="register-password"
+                  aria-label="Tampilkan kata sandi"
+                  aria-pressed="false"
+                >
+                  Lihat
+                </button>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="register-confirm">Konfirmasi kata sandi</label>
+
+              <div class="password-field">
+                <input
+                  id="register-confirm"
+                  type="password"
+                  placeholder="Ulangi kata sandi"
+                  minlength="8"
+                  autocomplete="new-password"
+                  required
+                />
+
+                <button
+                  class="reveal"
+                  type="button"
+                  data-password="register-confirm"
+                  aria-label="Tampilkan kata sandi"
+                  aria-pressed="false"
+                >
+                  Lihat
+                </button>
+              </div>
+            </div>
+
+            <p id="register-error" class="form-error" role="alert" hidden></p>
+
+            <p class="demo-note">
+              Gunakan data contoh. Akun demo hanya berlaku sampai halaman dimuat
+              ulang; jangan gunakan kata sandi asli.
+            </p>
+
+            <button class="btn btn-primary full-width" type="submit">
+              Daftar akun <span aria-hidden="true">→</span>
+            </button>
+          </form>
+
+          <div class="divider"><span>atau</span></div>
+
+          <button
+            class="btn btn-outline full-width"
+            type="button"
+            data-info="google"
+          >
+            <span class="google-letter" aria-hidden="true">G</span>
+            Daftar dengan Google
+          </button>
+
+          <p class="auth-switch">
+            Sudah punya akun?
+            <a href="#/login">Masuk</a>
+          </p>
+
+          <button
+            class="text-button small-text"
+            type="button"
+            data-info="password"
+          >
+            Lupa password?
+          </button>
+        </div>
+      </section>
+
+      <!-- =========================
+         HALAMAN BERANDA
+         ========================= -->
+      <section data-page="beranda" hidden>
+        <div class="container home-content">
+          <!-- HERO -->
+          <section class="hero" aria-labelledby="hero-title">
+            <img
+              src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f"
+              alt=""
+            />
+
+            <div class="hero-content">
+              <span class="eyebrow light">
+                BELAJAR HARI INI, BERTUMBUH SETIAP HARI
+              </span>
+
+              <h1 id="hero-title" tabindex="-1">
+                Buka pengetahuan.<br />
+                <em>Temukan peluang.</em>
+              </h1>
+
+              <p>
+                Video pembelajaran untuk rasa ingin tahumu. Jelajahi
+                keterampilan baru dan melangkah lebih jauh, dengan ritmemu
+                sendiri.
+              </p>
+
+              <button
+                class="btn btn-primary hero-cta"
+                type="button"
+                data-catalog
+              >
+                Temukan kelasmu <span aria-hidden="true">↗</span>
+              </button>
+
+              <div class="hero-footnote">
+                <span aria-hidden="true">✓</span>
+                Fleksibel
+                <span aria-hidden="true">·</span>
+                Ramah pemula
+                <span aria-hidden="true">·</span>
+                Praktis
+              </div>
+            </div>
+
+            <div class="hero-stamp">
+              <span aria-hidden="true">▶</span>
+              <div>
+                <strong>Belajar tanpa terburu-buru.</strong>
+                <small>Putar, jeda, pahami, ulangi.</small>
+              </div>
+            </div>
+          </section>
+
+          <!-- KATALOG -->
+          <section id="catalog" class="catalog" aria-labelledby="catalog-title">
+            <div class="section-heading">
+              <div>
+                <span class="eyebrow">PILIH LANGKAH BERIKUTNYA</span>
+
+                <h2 id="catalog-title">Kelas yang membuka kemungkinan.</h2>
+
+                <p>Temukan topik yang cocok dengan minat dan tujuanmu.</p>
+              </div>
+
+              <span class="catalog-marker">
+                Jelajahi &amp; pelajari
+                <span aria-hidden="true">↙</span>
+              </span>
+            </div>
+
+            <div
+              class="category-list"
+              role="group"
+              aria-label="Filter kategori"
+            >
+              <button
+                type="button"
+                data-category="Semua Kelas"
+                aria-pressed="true"
+              >
+                Semua Kelas
+              </button>
+
+              <button
+                type="button"
+                data-category="Pemasaran"
+                aria-pressed="false"
+              >
+                Pemasaran
+              </button>
+
+              <button type="button" data-category="Desain" aria-pressed="false">
+                Desain
+              </button>
+
+              <button
+                type="button"
+                data-category="Pengembangan Diri"
+                aria-pressed="false"
+              >
+                Pengembangan Diri
+              </button>
+
+              <button type="button" data-category="Bisnis" aria-pressed="false">
+                Bisnis
+              </button>
+            </div>
+
+            <p id="course-count" class="course-count" aria-live="polite"></p>
+
+            <!-- Kartu kelas dibuat oleh JavaScript. -->
+            <div id="course-grid" class="course-grid"></div>
+
+            <p class="catalog-note">
+              Katalog dan mentor adalah contoh. Setiap kartu membuka pemutar
+              video demo, bukan materi kelas lengkap.
+            </p>
+          </section>
+
+          <!-- NEWSLETTER -->
+          <section class="newsletter" aria-labelledby="newsletter-title">
+            <div>
+              <span class="eyebrow">
+                SEDIKIT INSPIRASI, BANYAK KEMUNGKINAN
+              </span>
+
+              <h2 id="newsletter-title">Jangan berhenti penasaran.</h2>
+
+              <p>Dapatkan kabar kelas dan inspirasi belajar lewat e-mail.</p>
+            </div>
+
+            <div class="newsletter-right">
+              <form id="newsletter-form" method="post">
+                <label class="sr-only" for="newsletter-email">
+                  E-mail newsletter
+                </label>
+
+                <input
+                  id="newsletter-email"
+                  type="email"
+                  placeholder="Masukkan e-mail kamu"
+                  autocomplete="email"
+                  required
+                />
+
+                <button class="btn btn-primary" type="submit">
+                  Berlangganan <span aria-hidden="true">→</span>
+                </button>
+              </form>
+
+              <p id="newsletter-status" class="newsletter-note" role="status">
+                Form demo. Belum terhubung ke layanan pengiriman e-mail.
+              </p>
+            </div>
+          </section>
+        </div>
+
+        <!-- FOOTER -->
+        <footer class="site-footer">
+          <div class="container footer-top">
+            <div class="footer-about">
+              <a class="brand" href="#/beranda">
+                <span class="brand-mark" aria-hidden="true">▶</span>
+                <span>video<b>belajar</b></span>
+              </a>
+
+              <p>
+                Ruang belajar untuk mengembangkan kemampuan dan menemukan
+                kemungkinan baru.
+              </p>
+
+              <span class="footer-label"> Proyek latihan frontend · 2026 </span>
+            </div>
+
+            <div>
+              <h3>Kategori</h3>
+              <button type="button" data-catalog="Pemasaran">Pemasaran</button>
+              <button type="button" data-catalog="Desain">Desain</button>
+              <button type="button" data-catalog="Pengembangan Diri">
+                Pengembangan Diri
+              </button>
+              <button type="button" data-catalog="Bisnis">Bisnis</button>
+            </div>
+
+            <div>
+              <h3>videobelajar</h3>
+              <button type="button" data-info="about">Tentang kami</button>
+              <button type="button" data-info="help">Pusat bantuan</button>
+              <button type="button" data-info="privacy">Privasi demo</button>
+            </div>
+
+            <div>
+              <h3>Media sosial</h3>
+
+              <a
+                href="https://www.instagram.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Instagram ↗
+              </a>
+
+              <a
+                href="https://www.youtube.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                YouTube ↗
+              </a>
+
+              <small class="footer-label"> Tautan platform contoh. </small>
+            </div>
+          </div>
+
+          <div class="container footer-bottom">
+            <span>© 2026 videobelajar. Dibuat untuk belajar.</span>
+            <span>Selalu ada hal baru untuk dipelajari.</span>
+          </div>
+        </footer>
+      </section>
+    </main>
+
+    <!-- =========================
+       DIALOG PEMUTAR VIDEO
+       ========================= -->
+    <dialog
+      id="player-dialog"
+      class="player-dialog"
+      aria-labelledby="player-title"
+    >
+      <div class="player-header">
+        <div>
+          <span class="eyebrow">PRATINJAU KELAS</span>
+          <h2 id="player-title"></h2>
+          <p id="player-mentor"></p>
+        </div>
+
+        <button
+          id="close-player"
+          class="icon-button"
+          type="button"
+          aria-label="Tutup pemutar"
+          autofocus
+        >
+          ×
+        </button>
+      </div>
+
+      <video id="course-video" controls playsinline preload="metadata">
+        Browser kamu tidak mendukung pemutar video HTML.
+      </video>
+
+      <div class="player-toolbar">
+        <p id="video-status" role="status">Siap diputar.</p>
+
+        <label for="playback-speed">
+          Kecepatan
+          <select id="playback-speed">
+            <option value="0.75">0,75×</option>
+            <option value="1" selected>1×</option>
+            <option value="1.25">1,25×</option>
+            <option value="1.5">1,5×</option>
+            <option value="2">2×</option>
+          </select>
+        </label>
+
+        <button
+          id="choose-video"
+          type="button"
+          class="btn btn-outline btn-small"
+        >
+          Pilih video sendiri
+        </button>
+
+        <input id="local-video-input" type="file" accept="video/*" hidden />
+      </div>
+
+      <div class="player-details">
+        <div>
+          <h3>Tentang kelas</h3>
+          <p id="player-description"></p>
+          <p id="video-note" class="notice"></p>
+
+          <a
+            class="small-text text-button"
+            href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/video"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Sumber video contoh: MDN ↗
+          </a>
+        </div>
+
+        <div>
+          <h3>Gambaran materi</h3>
+          <ul id="topic-list"></ul>
+        </div>
+      </div>
+    </dialog>
+
+    <!-- DIALOG INFORMASI -->
+    <dialog id="info-dialog" class="info-dialog" aria-labelledby="info-title">
+      <div class="info-top">
+        <span class="eyebrow">INFORMASI DEMO</span>
+
+        <button
+          id="close-info"
+          class="icon-button"
+          type="button"
+          aria-label="Tutup informasi"
+          autofocus
+        >
+          ×
+        </button>
+      </div>
+
+      <h2 id="info-title"></h2>
+      <p id="info-description"></p>
+    </dialog>
+
+    <!-- NOTIFIKASI -->
+    <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+
+    <script>
+      function videoBelajarApp() {
+        "use strict";
+
+        const $ = selector => document.querySelector(selector);
+
+        const $$ = selector => Array.from(document.querySelectorAll(selector));
+
+        /* =========================
+         1. DATA KELAS CONTOH
+         ========================= */
+
+        const courses = [
+          {
+            id: 1,
+            category: "Pemasaran",
+            title: "Digital Marketing: dari Ide ke Strategi",
+            description:
+              "Kenali audiensmu dan susun strategi pemasaran yang lebih terarah.",
+            mentor: "Andi Pratama",
+            role: "Digital Marketing Mentor",
+            image: "photo-1460925895917-afdab827c52f",
+            tag: "Mulai dari sini",
+            topics: [
+              "Memahami target audiens",
+              "Memilih kanal pemasaran",
+              "Merancang kampanye sederhana",
+            ],
+          },
+          {
+            id: 2,
+            category: "Desain",
+            title: "Dasar Desain Visual yang Bercerita",
+            description:
+              "Pelajari komposisi, warna, dan tipografi untuk menyampaikan sebuah ide.",
+            mentor: "Sinta Maharani",
+            role: "Visual Design Mentor",
+            image: "photo-1434030216411-0b793f4b4173",
+            tag: "Untuk pemula",
+            topics: [
+              "Prinsip komposisi",
+              "Warna dan tipografi",
+              "Membuat desain poster",
+            ],
+          },
+          {
+            id: 3,
+            category: "Pengembangan Diri",
+            title: "Berani Bicara, Lebih Percaya Diri",
+            description:
+              "Bangun cara menyampaikan pendapat yang jelas, tenang, dan meyakinkan.",
+            mentor: "Budi Santoso",
+            role: "Communication Mentor",
+            image: "photo-1552664730-d307ca884978",
+            tag: "Skill untuk karier",
+            topics: [
+              "Menyusun pesan utama",
+              "Mengelola rasa gugup",
+              "Latihan presentasi",
+            ],
+          },
+          {
+            id: 4,
+            category: "Bisnis",
+            title: "Wujudkan Ide Jadi Bisnis Pertamamu",
+            description:
+              "Mulai dari masalah pelanggan hingga rencana usaha yang bisa dijalankan.",
+            mentor: "Rina Lestari",
+            role: "Business Mentor",
+            image: "photo-1454165804606-c3d57bc86b40",
+            tag: "Langkah pertama",
+            topics: [
+              "Menemukan peluang",
+              "Memahami pelanggan",
+              "Menyusun model bisnis",
+            ],
+          },
+          {
+            id: 5,
+            category: "Pemasaran",
+            title: "Konten yang Relevan, Brand yang Diingat",
+            description:
+              "Rancang konten yang dekat dengan audiens dan konsisten dengan brand.",
+            mentor: "Dimas Saputra",
+            role: "Content Strategy Mentor",
+            image: "photo-1522202176988-66273c2fd55f",
+            tag: "Belajar kreatif",
+            topics: [
+              "Menentukan pilar konten",
+              "Menyusun kalender konten",
+              "Mengevaluasi hasil",
+            ],
+          },
+          {
+            id: 6,
+            category: "Desain",
+            title: "Kenali UI/UX dan Pengalaman Pengguna",
+            description:
+              "Pahami kebutuhan pengguna sebelum mulai menggambar sebuah tampilan.",
+            mentor: "Nadia Putri",
+            role: "Product Design Mentor",
+            image: "photo-1523240795612-9a054b0db644",
+            tag: "Eksplorasi baru",
+            topics: [
+              "Memahami masalah pengguna",
+              "Membuat user flow",
+              "Menguji prototipe sederhana",
+            ],
+          },
+        ];
+
+        /* =========================
+         2. STATE DEMO
+         ========================= */
+
+        /*
+        PENTING:
+        Ini hanya simulasi frontend, bukan autentikasi produksi.
+
+        Akun tambahan berada di memori tab dan hilang saat reload.
+        Tidak ada password yang dikirim ke server atau disimpan
+        ke localStorage. Jangan gunakan password asli.
+
+        Untuk aplikasi sungguhan, ganti bagian ini dengan backend
+        yang menerapkan autentikasi dan penyimpanan password aman.
+      */
+
+        const accounts = new Map([
+          [
+            "demo@videobelajar.id",
+            {
+              name: "Pelajar Demo",
+              password: "Belajar123!",
+            },
+          ],
+        ]);
+
+        let currentUser = null;
+        let activeCategory = "Semua Kelas";
+        let toastTimer;
+        let blobURL = null;
+        let sourceIndex = 0;
+        let isLocalVideo = false;
+
+        /*
+        Video contoh untuk menguji pemutar.
+        Bukan materi kelas asli.
+        Ganti URL berikut jika sudah memiliki video materi.
+      */
+        const demoSources = [
+          "https://developer.mozilla.org/shared-assets/videos/flower.mp4",
+          "https://developer.mozilla.org/shared-assets/videos/flower.webm",
+        ];
+
+        const playerDialog = $("#player-dialog");
+        const video = $("#course-video");
+        const infoDialog = $("#info-dialog");
+
+        /* =========================
+         3. FUNGSI BANTU
+         ========================= */
+
+        const escapeHTML = value =>
+          String(value).replace(
+            /[&<>"']/g,
+            char =>
+              ({
+                "&": "&amp;",
+                "<": "&lt;",
+                ">": "&gt;",
+                '"': "&quot;",
+                "'": "&#39;",
+              })[char],
+          );
+
+        const initials = name =>
+          name
+            .trim()
+            .split(/\s+/)
+            .slice(0, 2)
+            .map(part => part[0])
+            .join("")
+            .toUpperCase();
+
+        function toast(message) {
+          clearTimeout(toastTimer);
+
+          $("#toast").textContent = message;
+          $("#toast").hidden = false;
+
+          toastTimer = setTimeout(() => {
+            $("#toast").hidden = true;
+          }, 5000);
+        }
+
+        function formError(id, message) {
+          const box = $(id);
+          box.textContent = message;
+          box.hidden = false;
+        }
+
+        /* =========================
+         4. RENDER KARTU KELAS
+         ========================= */
+
+        function renderCourses() {
+          const visible = courses.filter(
+            course =>
+              activeCategory === "Semua Kelas" ||
+              course.category === activeCategory,
+          );
+
+          $("#course-grid").innerHTML = visible
+            .map(
+              course => `
+          <article class="course-card">
+
+            <button
+              class="course-cover"
+              type="button"
+              data-course="${course.id}"
+              aria-label="Putar video contoh untuk ${escapeHTML(course.title)}"
+            >
+              <img
+                src="https://images.unsplash.com/${course.image}"
+                alt="Ilustrasi kelas ${escapeHTML(course.category)}"
+                loading="lazy"
+              >
+
+              <span class="course-tag">
+                ${escapeHTML(course.tag)}
+              </span>
+
+              <span class="cover-play" aria-hidden="true">▶</span>
+              <span class="video-label">VIDEO DEMO</span>
+            </button>
+
+            <div class="course-body">
+              <p class="course-category">
+                ${escapeHTML(course.category)}
+              </p>
+
+              <h3>
+                <button
+                  type="button"
+                  class="title-button"
+                  data-course="${course.id}"
+                >
+                  ${escapeHTML(course.title)}
+                </button>
+              </h3>
+
+              <p class="course-description">
+                ${escapeHTML(course.description)}
+              </p>
+
+              <div class="mentor">
+                <span
+                  class="avatar mentor-avatar"
+                  aria-hidden="true"
+                >
+                  ${initials(course.mentor)}
+                </span>
+
+                <div>
+                  <strong>${escapeHTML(course.mentor)}</strong>
+                  <small>${escapeHTML(course.role)}</small>
+                </div>
+              </div>
+
+              <div class="course-bottom">
+                <span>Level pemula</span>
+
+                <button
+                  type="button"
+                  class="text-button"
+                  data-course="${course.id}"
+                >
+                  Tonton demo <span aria-hidden="true">↗</span>
+                </button>
+              </div>
+            </div>
+
+          </article>
+        `,
+            )
+            .join("");
+
+          $("#course-count").textContent =
+            `${visible.length} kelas ditampilkan`;
+
+          $$("[data-category]").forEach(button => {
+            button.setAttribute(
+              "aria-pressed",
+              String(button.dataset.category === activeCategory),
+            );
+          });
+        }
+
+        /* =========================
+         5. NAVIGASI TIGA HALAMAN
+         ========================= */
+
+        function updateUser() {
+          $("#guest-actions").hidden = Boolean(currentUser);
+          $("#profile-menu").hidden = !currentUser;
+
+          $("#profile-name").textContent = currentUser
+            ? currentUser.name
+            : "Tamu";
+
+          $("#profile-email").textContent = currentUser
+            ? currentUser.email
+            : "";
+
+          $("#profile-initials").textContent = currentUser
+            ? initials(currentUser.name)
+            : "U";
+        }
+
+        function renderRoute() {
+          const requested = location.hash.replace(/^#\/?/, "") || "login";
+
+          const route = ["login", "register", "beranda"].includes(requested)
+            ? requested
+            : "login";
+
+          if (playerDialog.open) {
+            playerDialog.close();
+          }
+
+          if (infoDialog.open) {
+            infoDialog.close();
+          }
+
+          $("#profile-menu").open = false;
+
+          /*
+          Hanya satu halaman yang tampil.
+          Dua halaman lainnya memakai atribut hidden.
+        */
+          $$("[data-page]").forEach(page => {
+            page.hidden = page.dataset.page !== route;
+          });
+
+          $("#home-navigation").hidden = route !== "beranda";
+          $("#auth-navigation").hidden = route === "beranda";
+
+          document.body.dataset.route = route;
+
+          const titles = {
+            login: "Masuk",
+            register: "Daftar",
+            beranda: "Beranda",
+          };
+
+          document.title = `${titles[route]} — videobelajar`;
+
+          updateUser();
+
+          window.scrollTo({
+            top: 0,
+            behavior: "instant",
+          });
+
+          requestAnimationFrame(() => {
+            const heading = document.querySelector(`[data-page="${route}"] h1`);
+
+            heading.focus({
+              preventScroll: true,
+            });
+          });
+        }
+
+        function navigate(route) {
+          if (location.hash === `#/${route}`) {
+            renderRoute();
+          } else {
+            location.hash = `/${route}`;
+          }
+        }
+
+        function goToCatalog(category) {
+          if (category) {
+            activeCategory = category;
+            renderCourses();
+          }
+
+          navigate("beranda");
+
+          setTimeout(() => {
+            const reduceMotion = matchMedia(
+              "(prefers-reduced-motion: reduce)",
+            ).matches;
+
+            $("#catalog").scrollIntoView({
+              behavior: reduceMotion ? "instant" : "smooth",
+            });
+          }, 60);
+        }
+
+        function signIn(name, email) {
+          currentUser = { name, email };
+          navigate("beranda");
+          toast(`Selamat datang, ${name}! Ini sesi demo lokal.`);
+        }
+
+        /* =========================
+         6. FORM LOGIN
+         ========================= */
+
+        $("#login-form").addEventListener("submit", event => {
+          event.preventDefault();
+
+          const email = $("#login-email").value.trim().toLowerCase();
+          const account = accounts.get(email);
+          const password = $("#login-password").value;
+
+          if (!account || account.password !== password) {
+            formError(
+              "#login-error",
+              "E-mail atau kata sandi demo belum cocok. Gunakan akun demo atau daftar terlebih dahulu.",
+            );
+            return;
+          }
+
+          $("#login-error").hidden = true;
+          $("#login-form").reset();
+
+          signIn(account.name, email);
+        });
+
+        /* =========================
+         7. FORM REGISTER
+         ========================= */
+
+        $("#register-form").addEventListener("submit", event => {
+          event.preventDefault();
+
+          const name = $("#register-name").value.trim();
+          const email = $("#register-email").value.trim().toLowerCase();
+          const password = $("#register-password").value;
+          const confirmation = $("#register-confirm").value;
+
+          const digits = $("#register-phone").value.replace(/\D/g, "");
+
+          if (name.length < 2) {
+            formError("#register-error", "Isi nama minimal 2 karakter.");
+            return;
+          }
+
+          if (digits.length < 8 || digits.length > 15) {
+            formError("#register-error", "Nomor HP harus berisi 8–15 angka.");
+            return;
+          }
+
+          if (password.length < 8) {
+            formError("#register-error", "Kata sandi minimal 8 karakter.");
+            return;
+          }
+
+          if (password !== confirmation) {
+            formError("#register-error", "Konfirmasi kata sandi belum sama.");
+            return;
+          }
+
+          if (accounts.has(email)) {
+            formError(
+              "#register-error",
+              "E-mail sudah terdaftar di sesi demo ini. Silakan masuk.",
+            );
+            return;
+          }
+
+          accounts.set(email, {
+            name,
+            password,
+          });
+
+          $("#register-error").hidden = true;
+          $("#register-form").reset();
+
+          signIn(name, email);
+        });
+
+        /* =========================
+         8. INFORMASI FITUR DEMO
+         ========================= */
+
+        const info = {
+          google: [
+            "Login Google belum dihubungkan",
+            "Tombol ini disiapkan untuk integrasi Google OAuth. Demo ini tidak masuk ke akun Google dan tidak mengirim data. Gunakan tombol Coba akun demo untuk menjelajahi website.",
+          ],
+          password: [
+            "Lupa kata sandi?",
+            "Pengiriman tautan reset memerlukan backend. Untuk mencoba website ini, gunakan demo@videobelajar.id dengan kata sandi Belajar123! atau buat akun demo baru.",
+          ],
+          about: [
+            "Tentang videobelajar",
+            "Prototipe platform Video Course on Demand untuk latihan HTML, CSS, dan JavaScript. Nama mentor, katalog, serta isi ringkasan kelas adalah data contoh.",
+          ],
+          help: [
+            "Cara mencoba website",
+            "Gunakan akun demo atau daftar akun sementara. Pilih kategori, klik Tonton demo, lalu gunakan kontrol pemutar. Kamu juga dapat memilih video milikmu untuk diputar lokal tanpa diunggah.",
+          ],
+          privacy: [
+            "Privasi dalam demo",
+            "Data akun hanya berada di memori tab dan hilang saat halaman dimuat ulang. Kata sandi tidak disimpan ke localStorage atau dikirim ke server. Jangan gunakan data sensitif. Gambar dan video contoh dimuat dari layanan eksternal.",
+          ],
+        };
+
+        /* =========================
+         9. EVENT TOMBOL
+         ========================= */
+
+        document.addEventListener("click", event => {
+          const button = event.target.closest(
+            "[data-course], [data-category], [data-catalog], " +
+              "[data-info], [data-password], [data-demo]",
+          );
+
+          if (!button) {
+            return;
+          }
+
+          if (button.hasAttribute("data-course")) {
+            openCourse(Number(button.dataset.course));
+          }
+
+          if (button.hasAttribute("data-category")) {
+            activeCategory = button.dataset.category;
+            renderCourses();
+          }
+
+          if (button.hasAttribute("data-catalog")) {
+            goToCatalog(button.dataset.catalog || undefined);
+          }
+
+          if (button.hasAttribute("data-info")) {
+            const content = info[button.dataset.info];
+
+            $("#info-title").textContent = content[0];
+            $("#info-description").textContent = content[1];
+
+            infoDialog.showModal();
+          }
+
+          if (button.hasAttribute("data-password")) {
+            const input = document.getElementById(button.dataset.password);
+
+            const visible = input.type === "password";
+
+            input.type = visible ? "text" : "password";
+
+            button.textContent = visible ? "Sembunyi" : "Lihat";
+
+            button.setAttribute("aria-pressed", String(visible));
+
+            button.setAttribute(
+              "aria-label",
+              visible ? "Sembunyikan kata sandi" : "Tampilkan kata sandi",
+            );
+          }
+
+          if (button.hasAttribute("data-demo")) {
+            signIn("Pelajar Demo", "demo@videobelajar.id");
+          }
+        });
+
+        $("#logout-button").addEventListener("click", () => {
+          currentUser = null;
+          $("#profile-menu").open = false;
+
+          navigate("login");
+          toast("Kamu sudah keluar dari sesi demo.");
+        });
+
+        /* =========================
+         10. NEWSLETTER DEMO
+         ========================= */
+
+        $("#newsletter-form").addEventListener("submit", event => {
+          event.preventDefault();
+
+          $("#newsletter-status").textContent =
+            "Simulasi berhasil. E-mail belum dikirim atau didaftarkan ke layanan newsletter.";
+
+          $("#newsletter-form").reset();
+        });
+
+        /* =========================
+         11. PEMUTAR VIDEO
+         ========================= */
+
+        function startVideo(source) {
+          video.pause();
+          video.src = source;
+          video.load();
+
+          $("#video-status").textContent = "Memuat video…";
+
+          video.playbackRate = Number($("#playback-speed").value);
+
+          /*
+          Browser bisa menolak autoplay.
+          Pengguna tetap dapat menekan Play secara manual.
+        */
+          video.play().catch(() => {
+            if (playerDialog.open && !video.error) {
+              $("#video-status").textContent =
+                "Tekan tombol putar pada video untuk mulai.";
+            }
+          });
+        }
+
+        function openCourse(id) {
+          const course = courses.find(item => item.id === id);
+
+          if (!course) {
+            return;
+          }
+
+          $("#player-title").textContent = course.title;
+
+          $("#player-mentor").textContent =
+            `${course.category} · ${course.mentor}`;
+
+          $("#player-description").textContent = course.description;
+
+          $("#topic-list").innerHTML = course.topics
+            .map(topic => `<li>${escapeHTML(topic)}</li>`)
+            .join("");
+
+          $("#video-note").textContent =
+            "Video contoh MDN, bukan materi kelas. Gunakan Pilih video sendiri untuk memutar file milikmu tanpa mengunggahnya.";
+
+          $("#video-status").textContent = "";
+          $("#playback-speed").value = "1";
+          $("#local-video-input").value = "";
+
+          video.poster = `https://images.unsplash.com/${course.image}`;
+
+          sourceIndex = 0;
+          isLocalVideo = false;
+
+          playerDialog.showModal();
+          document.body.classList.add("modal-open");
+
+          startVideo(demoSources[0]);
+        }
+
+        $("#close-player").addEventListener("click", () => {
+          playerDialog.close();
+        });
+
+        $("#close-info").addEventListener("click", () => {
+          infoDialog.close();
+        });
+
+        playerDialog.addEventListener("close", () => {
+          video.pause();
+          video.removeAttribute("src");
+          video.load();
+
+          if (blobURL) {
+            URL.revokeObjectURL(blobURL);
+            blobURL = null;
+          }
+
+          document.body.classList.remove("modal-open");
+        });
+
+        /*
+        Klik di luar dialog untuk menutupnya.
+        Tombol Escape juga bekerja melalui perilaku native dialog.
+      */
+        [playerDialog, infoDialog].forEach(dialog => {
+          dialog.addEventListener("click", event => {
+            const rect = dialog.getBoundingClientRect();
+
+            const outside =
+              event.clientX < rect.left ||
+              event.clientX > rect.right ||
+              event.clientY < rect.top ||
+              event.clientY > rect.bottom;
+
+            if (event.target === dialog && outside) {
+              dialog.close();
+            }
+          });
+        });
+
+        video.addEventListener("playing", () => {
+          $("#video-status").textContent = "Video sedang diputar.";
+        });
+
+        video.addEventListener("pause", () => {
+          if (playerDialog.open && !video.ended) {
+            $("#video-status").textContent = "Video dijeda.";
+          }
+        });
+
+        video.addEventListener("ended", () => {
+          $("#video-status").textContent =
+            "Video selesai. Kamu bisa memutarnya kembali.";
+        });
+
+        video.addEventListener("error", () => {
+          if (!playerDialog.open) {
+            return;
+          }
+
+          /*
+          Coba sumber video kedua jika yang pertama gagal.
+        */
+          if (!isLocalVideo && sourceIndex < demoSources.length - 1) {
+            sourceIndex++;
+            startVideo(demoSources[sourceIndex]);
+            return;
+          }
+
+          $("#video-status").textContent =
+            "Video tidak dapat dimuat. Periksa internet atau pilih video lokal dengan format yang didukung browser.";
+        });
+
+        $("#playback-speed").addEventListener("change", event => {
+          video.playbackRate = Number(event.target.value);
+        });
+
+        /* =========================
+         12. VIDEO LOKAL
+         ========================= */
+
+        $("#choose-video").addEventListener("click", () => {
+          $("#local-video-input").click();
+        });
+
+        $("#local-video-input").addEventListener("change", event => {
+          const file = event.target.files[0];
+
+          if (!file) {
+            return;
+          }
+
+          if (file.type && !file.type.startsWith("video/")) {
+            toast("Pilih file video, misalnya MP4 atau WebM.");
+            return;
+          }
+
+          video.pause();
+
+          if (blobURL) {
+            URL.revokeObjectURL(blobURL);
+          }
+
+          blobURL = URL.createObjectURL(file);
+          isLocalVideo = true;
+
+          video.removeAttribute("poster");
+
+          $("#video-note").textContent =
+            `Video lokal: ${file.name}. File ini tidak diunggah ke server.`;
+
+          startVideo(blobURL);
+        });
+
+        /* =========================
+         13. JALANKAN APLIKASI
+         ========================= */
+
+        window.addEventListener("hashchange", renderRoute);
+
+        renderCourses();
+        renderRoute();
+      }
+
+      videoBelajarApp();
+    </script>
+  </body>
+</html>
